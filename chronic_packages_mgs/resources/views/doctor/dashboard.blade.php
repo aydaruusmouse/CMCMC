@@ -9,10 +9,10 @@
 </div>
 
 <!-- Statistics Cards -->
-<div class="row g-4 mb-4">
+<div class="row g-2 mb-3">
     <div class="col-lg-4 col-md-6">
         <div class="stat-card stat-card-primary">
-            <div class="d-flex justify-content-between align-items-start mb-3">
+            <div class="d-flex justify-content-between align-items-start mb-2">
                 <div>
                     <div class="stat-label">Active Patients</div>
                     <div class="stat-value">{{ $stats['active_patients'] }}</div>
@@ -30,7 +30,7 @@
     
     <div class="col-lg-4 col-md-6">
         <div class="stat-card stat-card-info">
-            <div class="d-flex justify-content-between align-items-start mb-3">
+            <div class="d-flex justify-content-between align-items-start mb-2">
                 <div>
                     <div class="stat-label">Upcoming Appointments</div>
                     <div class="stat-value">{{ $stats['upcoming_appointments'] }}</div>
@@ -48,7 +48,7 @@
     
     <div class="col-lg-4 col-md-6">
         <div class="stat-card stat-card-warning">
-            <div class="d-flex justify-content-between align-items-start mb-3">
+            <div class="d-flex justify-content-between align-items-start mb-2">
                 <div>
                     <div class="stat-label">Pending Consultations</div>
                     <div class="stat-value">{{ $stats['pending_consultations'] }}</div>

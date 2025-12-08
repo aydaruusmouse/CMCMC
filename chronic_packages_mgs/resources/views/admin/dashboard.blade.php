@@ -10,9 +10,9 @@
 
 <!-- Statistics Cards -->
 <div class="row g-2 mb-3">
-    <div class="col-lg-3 col-md-6">
+    <div class="col-lg-3 col-md-3 col-sm-6">
         <div class="stat-card stat-card-primary">
-            <div class="d-flex justify-content-between align-items-start mb-3">
+            <div class="d-flex justify-content-between align-items-start mb-2">
                 <div>
                     <div class="stat-label">Total Patients</div>
                     <div class="stat-value">{{ $stats['total_patients'] }}</div>
@@ -28,9 +28,9 @@
         </div>
     </div>
     
-    <div class="col-lg-3 col-md-6">
+    <div class="col-lg-3 col-md-3 col-sm-6">
         <div class="stat-card stat-card-info">
-            <div class="d-flex justify-content-between align-items-start mb-3">
+            <div class="d-flex justify-content-between align-items-start mb-2">
                 <div>
                     <div class="stat-label">Total Bookings</div>
                     <div class="stat-value">{{ $stats['total_bookings'] }}</div>
@@ -46,9 +46,9 @@
         </div>
     </div>
     
-    <div class="col-lg-3 col-md-6">
+    <div class="col-lg-3 col-md-3 col-sm-6">
         <div class="stat-card stat-card-success">
-            <div class="d-flex justify-content-between align-items-start mb-3">
+            <div class="d-flex justify-content-between align-items-start mb-2">
                 <div>
                     <div class="stat-label">Active Bookings</div>
                     <div class="stat-value">{{ $stats['active_bookings'] }}</div>
@@ -64,9 +64,9 @@
         </div>
     </div>
     
-    <div class="col-lg-3 col-md-6">
+    <div class="col-lg-3 col-md-3 col-sm-6">
         <div class="stat-card stat-card-warning">
-            <div class="d-flex justify-content-between align-items-start mb-3">
+            <div class="d-flex justify-content-between align-items-start mb-2">
                 <div>
                     <div class="stat-label">Total Revenue</div>
                     <div class="stat-value">${{ number_format($stats['total_revenue'], 0) }}</div>
@@ -85,7 +85,7 @@
 
 <!-- Additional Stats Row -->
 <div class="row g-2 mb-3">
-    <div class="col-lg-4 col-md-6">
+    <div class="col-lg-2 col-md-6">
         <div class="stat-card stat-card-secondary">
             <div class="d-flex justify-content-between align-items-center">
                 <div>
@@ -99,7 +99,7 @@
         </div>
     </div>
     
-    <div class="col-lg-4 col-md-6">
+    <div class="col-lg-2 col-md-6">
         <div class="stat-card stat-card-purple">
             <div class="d-flex justify-content-between align-items-center">
                 <div>
@@ -113,7 +113,7 @@
         </div>
     </div>
     
-    <div class="col-lg-4 col-md-6">
+    <div class="col-lg-2 col-md-6">
         <div class="stat-card stat-card-teal">
             <div class="d-flex justify-content-between align-items-center">
                 <div>

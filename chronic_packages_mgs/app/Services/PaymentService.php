@@ -47,3 +47,4 @@ class PaymentService
         $payment->booking->update(['status' => 'active']);
     }
 }
+

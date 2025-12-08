@@ -60,3 +60,4 @@ class AppointmentService
         return $query->orderBy('appointment_date')->get();
     }
 }
+

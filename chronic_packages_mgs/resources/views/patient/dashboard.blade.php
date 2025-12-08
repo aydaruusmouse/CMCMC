@@ -9,7 +9,7 @@
 </div>
 
 @if($activeBooking)
-<div class="row g-4 mb-4">
+<div class="row g-2 mb-3">
     <div class="col-md-6">
         <div class="card border-primary shadow-sm">
             <div class="card-header bg-primary text-white">
@@ -85,10 +85,10 @@
 @endif
 
 <!-- Health Statistics -->
-<div class="row g-4 mb-4">
+<div class="row g-2 mb-3">
     <div class="col-md-4">
         <div class="stat-card stat-card-primary">
-            <div class="d-flex justify-content-between align-items-start mb-3">
+            <div class="d-flex justify-content-between align-items-start mb-2">
                 <div>
                     <div class="stat-label">Health Records</div>
                     <div class="stat-value">{{ $healthSummary['total_records'] ?? 0 }}</div>
@@ -106,7 +106,7 @@
     @if(isset($healthSummary['average_blood_sugar']) && $healthSummary['average_blood_sugar'])
     <div class="col-md-4">
         <div class="stat-card stat-card-danger">
-            <div class="d-flex justify-content-between align-items-start mb-3">
+            <div class="d-flex justify-content-between align-items-start mb-2">
                 <div>
                     <div class="stat-label">Avg Blood Sugar</div>
                     <div class="stat-value">{{ number_format($healthSummary['average_blood_sugar'], 1) }}</div>
@@ -125,7 +125,7 @@
     @if(isset($healthSummary['average_weight']) && $healthSummary['average_weight'])
     <div class="col-md-4">
         <div class="stat-card stat-card-info">
-            <div class="d-flex justify-content-between align-items-start mb-3">
+            <div class="d-flex justify-content-between align-items-start mb-2">
                 <div>
                     <div class="stat-label">Avg Weight</div>
                     <div class="stat-value">{{ number_format($healthSummary['average_weight'], 1) }}</div>
@@ -144,7 +144,7 @@
 </div>
 
 <!-- Appointments and Consultations -->
-<div class="row g-4">
+<div class="row g-2">
     <div class="col-md-6">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">

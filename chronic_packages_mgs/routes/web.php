@@ -44,13 +44,13 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/dashboard', [AgentDashboardController::class, 'index'])->name('dashboard');
         Route::resource('bookings', AgentBookingController::class);
         Route::post('/bookings/{booking}/confirm-payment', [AgentBookingController::class, 'confirmPayment'])->name('bookings.confirm-payment');
-        Route::get('/patients', function() { return view('agent.patients.index'); })->name('patients.index');
+        Route::get('/patients', [\App\Http\Controllers\Agent\PatientController::class, 'index'])->name('patients.index');
     });
 
     // Doctor Routes
     Route::prefix('doctor')->name('doctor.')->middleware('role:doctor')->group(function () {
         Route::get('/dashboard', [DoctorDashboardController::class, 'index'])->name('dashboard');
-        Route::get('/patients', function() { return view('doctor.patients.index'); })->name('patients.index');
+        Route::get('/patients', [\App\Http\Controllers\Doctor\PatientController::class, 'index'])->name('patients.index');
         Route::get('/consultations', [DoctorConsultationController::class, 'index'])->name('consultations.index');
         Route::get('/consultations/create/{booking}', [DoctorConsultationController::class, 'create'])->name('consultations.create');
         Route::post('/consultations/{booking}', [DoctorConsultationController::class, 'store'])->name('consultations.store');
@@ -62,6 +62,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/health-data', [PatientHealthDataController::class, 'index'])->name('health-data.index');
         Route::get('/health-data/create', [PatientHealthDataController::class, 'create'])->name('health-data.create');
         Route::post('/health-data', [PatientHealthDataController::class, 'store'])->name('health-data.store');
-        Route::get('/appointments', function() { return view('patient.appointments.index'); })->name('appointments.index');
+        Route::get('/appointments', [\App\Http\Controllers\Patient\AppointmentController::class, 'index'])->name('appointments.index');
     });
 });

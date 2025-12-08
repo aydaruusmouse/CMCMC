@@ -96,7 +96,7 @@ body {
 
 /* Main Content */
 .main-content {
-    padding: 2.5rem;
+    padding: 1.5rem;
     margin-left: 250px;
     min-height: 100vh;
 }
@@ -406,7 +406,7 @@ body {
 
 .stat-card:hover {
     box-shadow: 0 20px 40px rgba(99, 102, 241, 0.15), 0 8px 16px rgba(0, 0, 0, 0.1);
-    transform: translateY(-8px) scale(1.02);
+    transform: translateY(-4px) scale(1.01);
     border-color: var(--primary-light);
 }
 

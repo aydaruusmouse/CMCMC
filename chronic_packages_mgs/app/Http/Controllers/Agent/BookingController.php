@@ -60,19 +60,41 @@ class BookingController extends Controller
             'payment_method' => 'required|in:zaad,edahab',
             'source_of_booking' => 'nullable|string',
             'where_heard_from' => 'nullable|string',
-            'is_new_patient' => 'boolean',
+            'is_new_patient' => 'nullable|boolean',
             'satisfaction_level' => 'nullable|integer|min:1|max:5',
             'discount_id' => 'nullable|exists:discounts,id',
         ]);
 
+        // Convert checkbox value to boolean
+        $validated['is_new_patient'] = $request->has('is_new_patient') ? true : false;
+
         $agent = Auth::user()->agent;
-        $booking = $this->bookingService->createBooking($validated, $agent->id);
+        
+        if (!$agent) {
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'Agent profile not found. Please contact administrator.');
+        }
+        
+        $result = $this->bookingService->createBooking($validated, $agent->id);
+        $booking = $result['booking'];
 
         // Schedule appointments
         $this->appointmentService->scheduleAppointments($booking, 2);
 
+        // If new user was created, show credentials
+        if ($result['is_new_user'] && $result['plain_password']) {
+            return redirect()->route('agent.bookings.index')
+                ->with('success', 'Booking created successfully!')
+                ->with('patient_credentials', [
+                    'email' => $result['user']->email,
+                    'password' => $result['plain_password'],
+                    'name' => $result['user']->name,
+                ]);
+        }
+
         return redirect()->route('agent.bookings.index')
-            ->with('success', 'Booking created successfully!');
+            ->with('success', 'Booking created successfully! Patient account already exists.');
     }
 
     public function confirmPayment(Booking $booking, Request $request)

@@ -12,7 +12,7 @@
 <div class="row g-2 mb-3">
     <div class="col-lg-3 col-md-6">
         <div class="stat-card stat-card-primary">
-            <div class="d-flex justify-content-between align-items-start mb-3">
+            <div class="d-flex justify-content-between align-items-start mb-2">
                 <div>
                     <div class="stat-label">Total Bookings</div>
                     <div class="stat-value">{{ $stats['total_bookings'] }}</div>
@@ -30,7 +30,7 @@
     
     <div class="col-lg-3 col-md-6">
         <div class="stat-card stat-card-success">
-            <div class="d-flex justify-content-between align-items-start mb-3">
+            <div class="d-flex justify-content-between align-items-start mb-2">
                 <div>
                     <div class="stat-label">Active Bookings</div>
                     <div class="stat-value">{{ $stats['active_bookings'] }}</div>
@@ -48,7 +48,7 @@
     
     <div class="col-lg-3 col-md-6">
         <div class="stat-card stat-card-warning">
-            <div class="d-flex justify-content-between align-items-start mb-3">
+            <div class="d-flex justify-content-between align-items-start mb-2">
                 <div>
                     <div class="stat-label">Pending Bookings</div>
                     <div class="stat-value">{{ $stats['pending_bookings'] }}</div>
@@ -66,7 +66,7 @@
     
     <div class="col-lg-3 col-md-6">
         <div class="stat-card stat-card-info">
-            <div class="d-flex justify-content-between align-items-start mb-3">
+            <div class="d-flex justify-content-between align-items-start mb-2">
                 <div>
                     <div class="stat-label">Total Revenue</div>
                     <div class="stat-value">${{ number_format($stats['total_revenue'], 0) }}</div>
@@ -147,4 +147,49 @@
         </div>
     </div>
 </div>
+
+<!-- Payment Modals - Outside table structure -->
+@foreach($recentBookings as $booking)
+    @if($booking->status === 'pending' && !$booking->payments->where('status', 'completed')->count())
+        <div class="modal fade" id="paymentModal{{ $booking->id }}" tabindex="-1" aria-labelledby="paymentModalLabel{{ $booking->id }}" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="paymentModalLabel{{ $booking->id }}">
+                            <i class="bi bi-credit-card me-2"></i>Confirm Payment
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="{{ route('agent.bookings.confirm-payment', $booking) }}" method="POST" id="paymentForm{{ $booking->id }}">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <p class="mb-1"><strong>Patient:</strong> {{ $booking->patient->user->name }}</p>
+                                <p class="mb-1"><strong>Amount:</strong> ${{ number_format($booking->final_price, 2) }}</p>
+                                <p class="mb-3"><strong>Method:</strong> {{ ucfirst($booking->payment_method) }}</p>
+                            </div>
+                            <div class="mb-3">
+                                <label for="transaction_id{{ $booking->id }}" class="form-label">Transaction ID *</label>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="transaction_id{{ $booking->id }}" 
+                                       name="transaction_id" 
+                                       required 
+                                       autocomplete="off"
+                                       placeholder="Enter transaction ID">
+                                <small class="text-muted">Enter the transaction ID from {{ ucfirst($booking->payment_method) }}</small>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-success">
+                                <i class="bi bi-check-circle me-1"></i>Confirm Payment
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endif
+@endforeach
 @endsection

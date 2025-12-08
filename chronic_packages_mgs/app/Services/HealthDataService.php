@@ -63,3 +63,4 @@ class HealthDataService
         return $query->with('patient.user')->orderBy('recorded_date', 'desc')->get();
     }
 }
+

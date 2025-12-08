@@ -9,23 +9,40 @@ use App\Models\Package;
 use App\Models\Discount;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class BookingService
 {
-    public function createBooking(array $data, $agentId): Booking
+    public function createBooking(array $data, $agentId): array
     {
         return DB::transaction(function () use ($data, $agentId) {
-            // Create or get user for patient
-            $user = User::firstOrCreate(
-                ['email' => $data['patient_email']],
-                [
+            $isNewUser = false;
+            $plainPassword = null;
+
+            // Check if user exists
+            $user = User::where('email', $data['patient_email'])->first();
+
+            if (!$user) {
+                // Generate secure random password (8 characters: letters and numbers)
+                $plainPassword = Str::random(8);
+                $isNewUser = true;
+
+                // Create new user for patient
+                $user = User::create([
                     'name' => $data['patient_name'],
-                    'password' => Hash::make('password123'), // Default password, should be changed
+                    'email' => $data['patient_email'],
+                    'password' => Hash::make($plainPassword),
                     'role' => 'patient',
                     'status' => 'active',
                     'phone' => $data['patient_phone'],
-                ]
-            );
+                ]);
+            } else {
+                // Update user info if needed
+                $user->update([
+                    'name' => $data['patient_name'],
+                    'phone' => $data['patient_phone'],
+                ]);
+            }
 
             // Create or get patient
             $patient = Patient::firstOrCreate(
@@ -37,6 +54,16 @@ class BookingService
                     'age' => $data['patient_age'],
                 ]
             );
+
+            // Update patient info if it already existed
+            if ($patient->wasRecentlyCreated === false) {
+                $patient->update([
+                    'phone' => $data['patient_phone'],
+                    'city' => $data['patient_city'],
+                    'village' => $data['patient_village'],
+                    'age' => $data['patient_age'],
+                ]);
+            }
 
             // Calculate price with discount
             $package = Package::findOrFail($data['package_id']);
@@ -72,7 +99,12 @@ class BookingService
                 'final_price' => $finalPrice,
             ]);
 
-            return $booking;
+            return [
+                'booking' => $booking,
+                'user' => $user,
+                'plain_password' => $plainPassword,
+                'is_new_user' => $isNewUser,
+            ];
         });
     }
 

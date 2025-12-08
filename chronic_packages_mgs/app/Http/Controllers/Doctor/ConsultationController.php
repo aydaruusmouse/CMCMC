@@ -24,6 +24,13 @@ class ConsultationController extends Controller
 
     public function create(Booking $booking)
     {
+        $doctor = Auth::user()->doctor;
+        
+        // Verify doctor has access to this booking
+        if ($booking->doctor_id !== $doctor->id) {
+            abort(403, 'You do not have access to this booking.');
+        }
+
         $patient = $booking->patient;
         $healthData = $patient->healthData()
             ->where('booking_id', $booking->id)
@@ -31,7 +38,14 @@ class ConsultationController extends Controller
             ->limit(10)
             ->get();
 
-        return view('doctor.consultations.create', compact('booking', 'patient', 'healthData'));
+        // Get upcoming appointments for this booking
+        $appointments = $booking->appointments()
+            ->where('status', 'scheduled')
+            ->where('appointment_date', '>=', now())
+            ->orderBy('appointment_date')
+            ->get();
+
+        return view('doctor.consultations.create', compact('booking', 'patient', 'healthData', 'appointments'));
     }
 
     public function store(Request $request, Booking $booking)
