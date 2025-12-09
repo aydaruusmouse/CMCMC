@@ -38,7 +38,7 @@
                                     <div>
                                         <strong>{{ $patient->user->name }}</strong>
                                         <br>
-                                        <small class="text-muted">{{ $patient->user->email }}</small>
+                                        <small class="text-muted">{{ $patient->phone ?? $patient->user->phone ?? 'N/A' }}</small>
                                     </div>
                                 </div>
                             </td>

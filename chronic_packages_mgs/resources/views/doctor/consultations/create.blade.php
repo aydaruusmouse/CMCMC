@@ -27,8 +27,8 @@
                     <div class="fw-bold">{{ $patient->user->name }}</div>
                 </div>
                 <div class="mb-3 pb-3 border-bottom">
-                    <label class="text-muted small mb-1 d-block">Email</label>
-                    <div class="small">{{ $patient->user->email }}</div>
+                    <label class="text-muted small mb-1 d-block">Phone</label>
+                    <div>{{ $patient->phone ?? $patient->user->phone ?? 'N/A' }}</div>
                 </div>
                 <div class="mb-3 pb-3 border-bottom">
                     <label class="text-muted small mb-1 d-block">Phone</label>

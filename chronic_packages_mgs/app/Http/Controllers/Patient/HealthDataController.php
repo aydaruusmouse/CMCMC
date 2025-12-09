@@ -17,12 +17,19 @@ class HealthDataController extends Controller
         $patient = Auth::user()->patient;
         $activeBooking = Booking::where('patient_id', $patient->id)
             ->where('status', 'active')
+            ->where(function($query) {
+                $query->whereNull('expiration_date')
+                      ->orWhere('expiration_date', '>=', now());
+            })
             ->latest()
             ->first();
 
-        if (!$activeBooking) {
+        if (!$activeBooking || $activeBooking->isExpired()) {
+            if ($activeBooking && $activeBooking->isExpired()) {
+                $activeBooking->update(['status' => 'expired']);
+            }
             return redirect()->route('patient.dashboard')
-                ->with('error', 'No active booking found.');
+                ->with('error', 'No active booking found or your package has expired.');
         }
 
         $healthData = $patient->healthData()
@@ -39,12 +46,19 @@ class HealthDataController extends Controller
         $activeBooking = Booking::with('package')
             ->where('patient_id', $patient->id)
             ->where('status', 'active')
+            ->where(function($query) {
+                $query->whereNull('expiration_date')
+                      ->orWhere('expiration_date', '>=', now());
+            })
             ->latest()
             ->first();
 
-        if (!$activeBooking) {
+        if (!$activeBooking || $activeBooking->isExpired()) {
+            if ($activeBooking && $activeBooking->isExpired()) {
+                $activeBooking->update(['status' => 'expired']);
+            }
             return redirect()->route('patient.dashboard')
-                ->with('error', 'No active booking found.');
+                ->with('error', 'No active booking found or your package has expired.');
         }
 
         return view('patient.health-data.create', compact('activeBooking'));
@@ -55,11 +69,18 @@ class HealthDataController extends Controller
         $patient = Auth::user()->patient;
         $activeBooking = Booking::where('patient_id', $patient->id)
             ->where('status', 'active')
+            ->where(function($query) {
+                $query->whereNull('expiration_date')
+                      ->orWhere('expiration_date', '>=', now());
+            })
             ->latest()
             ->first();
 
-        if (!$activeBooking) {
-            return redirect()->back()->with('error', 'No active booking found.');
+        if (!$activeBooking || $activeBooking->isExpired()) {
+            if ($activeBooking && $activeBooking->isExpired()) {
+                $activeBooking->update(['status' => 'expired']);
+            }
+            return redirect()->back()->with('error', 'No active booking found or your package has expired.');
         }
 
         $validated = $request->validate([

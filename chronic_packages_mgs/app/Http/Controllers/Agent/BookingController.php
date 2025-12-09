@@ -48,7 +48,6 @@ class BookingController extends Controller
     {
         $validated = $request->validate([
             'patient_name' => 'required|string',
-            'patient_email' => 'required|email',
             'patient_phone' => 'required|string',
             'patient_city' => 'required|string',
             'patient_village' => 'required|string',
@@ -87,7 +86,7 @@ class BookingController extends Controller
             return redirect()->route('agent.bookings.index')
                 ->with('success', 'Booking created successfully!')
                 ->with('patient_credentials', [
-                    'email' => $result['user']->email,
+                    'phone' => $result['user']->phone,
                     'password' => $result['plain_password'],
                     'name' => $result['user']->name,
                 ]);

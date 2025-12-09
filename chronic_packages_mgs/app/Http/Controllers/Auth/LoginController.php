@@ -17,26 +17,28 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'email' => 'required|email',
+            'phone' => 'required|string',
             'password' => 'required',
         ]);
 
-        if (Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
-            $request->session()->regenerate();
-            $user = Auth::user();
+        // Find user by phone
+        $user = \App\Models\User::where('phone', $request->phone)->first();
 
+        if ($user && \Illuminate\Support\Facades\Hash::check($request->password, $user->password)) {
             if (!$user->isActive()) {
-                Auth::logout();
                 throw ValidationException::withMessages([
-                    'email' => 'Your account is not active. Please contact administrator.',
+                    'phone' => 'Your account is not active. Please contact administrator.',
                 ]);
             }
+
+            Auth::login($user, $request->boolean('remember'));
+            $request->session()->regenerate();
 
             return $this->redirectToRole($user->role);
         }
 
         throw ValidationException::withMessages([
-            'email' => 'The provided credentials do not match our records.',
+            'phone' => 'The provided credentials do not match our records.',
         ]);
     }
 

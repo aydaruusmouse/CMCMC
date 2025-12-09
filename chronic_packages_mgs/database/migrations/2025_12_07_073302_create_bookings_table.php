@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('where_heard_from')->nullable();
             $table->boolean('is_new_patient')->default(true);
             $table->integer('satisfaction_level')->nullable(); // 1-5
-            $table->foreignId('discount_id')->nullable()->constrained('discounts')->onDelete('set null');
+            $table->unsignedBigInteger('discount_id')->nullable();
             $table->decimal('final_price', 10, 2);
             $table->timestamps();
         });

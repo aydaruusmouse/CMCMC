@@ -39,24 +39,6 @@
                     @enderror
                 </div>
                 <div class="col-md-6">
-                    <label for="patient_email" class="form-label fw-semibold">
-                        <i class="bi bi-envelope me-1 text-primary"></i>Patient Email <span class="text-danger">*</span>
-                    </label>
-                    <input type="email" 
-                           class="form-control @error('patient_email') is-invalid @enderror" 
-                           id="patient_email" 
-                           name="patient_email" 
-                           value="{{ old('patient_email') }}" 
-                           placeholder="patient@example.com"
-                           required>
-                    @error('patient_email')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-
-            <div class="row g-3 mb-3">
-                <div class="col-md-4">
                     <label for="patient_phone" class="form-label fw-semibold">
                         <i class="bi bi-telephone me-1 text-primary"></i>Patient Phone <span class="text-danger">*</span>
                     </label>
@@ -71,7 +53,10 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
-                <div class="col-md-4">
+            </div>
+
+            <div class="row g-3 mb-3">
+                <div class="col-md-6">
                     <label for="patient_city" class="form-label fw-semibold">
                         <i class="bi bi-geo-alt me-1 text-primary"></i>City <span class="text-danger">*</span>
                     </label>
@@ -86,7 +71,7 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <label for="patient_village" class="form-label fw-semibold">
                         <i class="bi bi-geo me-1 text-primary"></i>Village <span class="text-danger">*</span>
                     </label>

@@ -21,8 +21,18 @@ class DashboardController extends Controller
         $activeBooking = Booking::with(['package', 'doctor.user'])
             ->where('patient_id', $patient->id)
             ->where('status', 'active')
+            ->where(function($query) {
+                $query->whereNull('expiration_date')
+                      ->orWhere('expiration_date', '>=', now());
+            })
             ->latest()
             ->first();
+        
+        // Auto-expire bookings if needed
+        if ($activeBooking && $activeBooking->isExpired()) {
+            $activeBooking->update(['status' => 'expired']);
+            $activeBooking = null;
+        }
 
         $healthSummary = $healthDataService->getPatientHealthSummary($patient->id);
         

@@ -13,7 +13,7 @@ return new class extends Migration
             $table->foreignId('doctor_id')->constrained('doctors')->onDelete('cascade');
             $table->foreignId('patient_id')->constrained('patients')->onDelete('cascade');
             $table->foreignId('booking_id')->constrained('bookings')->onDelete('cascade');
-            $table->foreignId('appointment_id')->nullable()->constrained('appointments')->onDelete('set null');
+            $table->unsignedBigInteger('appointment_id')->nullable();
             $table->text('consultation_notes')->nullable();
             $table->text('prescription')->nullable();
             $table->text('medical_recommendations')->nullable();

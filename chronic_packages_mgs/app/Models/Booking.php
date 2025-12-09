@@ -15,6 +15,7 @@ class Booking extends Model
         'doctor_id',
         'package_id',
         'booking_date',
+        'expiration_date',
         'status',
         'booking_type',
         'payment_method',
@@ -28,9 +29,22 @@ class Booking extends Model
 
     protected $casts = [
         'booking_date' => 'date',
+        'expiration_date' => 'date',
         'is_new_patient' => 'boolean',
         'final_price' => 'decimal:2',
     ];
+
+    // Check if booking is expired
+    public function isExpired(): bool
+    {
+        return $this->expiration_date && $this->expiration_date->isPast();
+    }
+
+    // Check if booking is active (not expired and status is active)
+    public function isActive(): bool
+    {
+        return $this->status === 'active' && !$this->isExpired();
+    }
 
     public function agent(): BelongsTo
     {

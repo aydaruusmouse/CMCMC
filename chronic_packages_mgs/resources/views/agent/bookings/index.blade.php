@@ -27,11 +27,11 @@
                                 <div class="fw-bold">{{ session('patient_credentials')['name'] }}</div>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label text-muted small">Email:</label>
+                                <label class="form-label text-muted small">Phone Number:</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control fw-bold" id="patientEmail" 
-                                           value="{{ session('patient_credentials')['email'] }}" readonly>
-                                    <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('patientEmail')">
+                                    <input type="text" class="form-control fw-bold" id="patientPhone" 
+                                           value="{{ session('patient_credentials')['phone'] }}" readonly>
+                                    <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('patientPhone')">
                                         <i class="bi bi-clipboard"></i>
                                     </button>
                                 </div>
@@ -52,7 +52,7 @@
                     <div class="mt-3">
                         <p class="text-muted small mb-0">
                             <i class="bi bi-shield-check me-1"></i>
-                            Patient can log in at: <a href="{{ route('login') }}" target="_blank">{{ route('login') }}</a>
+                            Patient can log in using Phone Number and Password at: <a href="{{ route('login') }}" target="_blank">{{ route('login') }}</a>
                         </p>
                     </div>
                 </div>

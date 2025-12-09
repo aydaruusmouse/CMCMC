@@ -7,6 +7,7 @@ use App\Models\Patient;
 use App\Models\User;
 use App\Models\Package;
 use App\Models\Discount;
+use App\Services\SmsService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -19,8 +20,8 @@ class BookingService
             $isNewUser = false;
             $plainPassword = null;
 
-            // Check if user exists
-            $user = User::where('email', $data['patient_email'])->first();
+            // Check if user exists by phone
+            $user = User::where('phone', $data['patient_phone'])->first();
 
             if (!$user) {
                 // Generate secure random password (8 characters: letters and numbers)
@@ -30,7 +31,6 @@ class BookingService
                 // Create new user for patient
                 $user = User::create([
                     'name' => $data['patient_name'],
-                    'email' => $data['patient_email'],
                     'password' => Hash::make($plainPassword),
                     'role' => 'patient',
                     'status' => 'active',
@@ -40,7 +40,6 @@ class BookingService
                 // Update user info if needed
                 $user->update([
                     'name' => $data['patient_name'],
-                    'phone' => $data['patient_phone'],
                 ]);
             }
 
@@ -81,13 +80,18 @@ class BookingService
                 }
             }
 
+            // Calculate expiration date (1 month from booking date)
+            $bookingDate = $data['booking_date'] ?? now();
+            $expirationDate = is_string($bookingDate) ? \Carbon\Carbon::parse($bookingDate)->addMonth() : $bookingDate->copy()->addMonth();
+
             // Create booking
             $booking = Booking::create([
                 'agent_id' => $agentId,
                 'patient_id' => $patient->id,
                 'doctor_id' => $data['doctor_id'],
                 'package_id' => $data['package_id'],
-                'booking_date' => $data['booking_date'] ?? now(),
+                'booking_date' => $bookingDate,
+                'expiration_date' => $expirationDate,
                 'status' => $data['status'] ?? 'pending',
                 'booking_type' => $data['booking_type'] ?? 'in-person',
                 'payment_method' => $data['payment_method'] ?? null,
@@ -99,11 +103,24 @@ class BookingService
                 'final_price' => $finalPrice,
             ]);
 
+            // Send SMS notification to doctor about new booking
+            try {
+                $smsService = new SmsService();
+                $smsService->sendBookingNotification($booking);
+            } catch (\Exception $e) {
+                // Log error but don't fail the booking creation
+                \Log::error('Failed to send booking SMS notification', [
+                    'booking_id' => $booking->id,
+                    'error' => $e->getMessage()
+                ]);
+            }
+
             return [
                 'booking' => $booking,
                 'user' => $user,
                 'plain_password' => $plainPassword,
                 'is_new_user' => $isNewUser,
+                'phone' => $user->phone,
             ];
         });
     }
