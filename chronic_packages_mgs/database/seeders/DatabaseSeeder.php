@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
             'role' => 'admin',
             'status' => 'active',
+            'phone' => '+252634671911'
         ]);
 
         // Create Packages

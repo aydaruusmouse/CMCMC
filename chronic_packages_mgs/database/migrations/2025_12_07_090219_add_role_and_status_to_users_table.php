@@ -8,11 +8,21 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->enum('role', ['admin', 'agent', 'doctor', 'patient'])->default('patient')->after('password');
-            $table->enum('status', ['active', 'pending', 'inactive'])->default('pending')->after('role');
-            $table->string('phone')->nullable()->after('status');
-        });
+        if (!Schema::hasColumn('users', 'role')) {
+            Schema::table('users', function (Blueprint $table) {
+                $table->enum('role', ['admin', 'agent', 'doctor', 'patient'])->default('patient')->after('password');
+            });
+        }
+        if (!Schema::hasColumn('users', 'status')) {
+            Schema::table('users', function (Blueprint $table) {
+                $table->enum('status', ['active', 'pending', 'inactive'])->default('pending')->after('role');
+            });
+        }
+        if (!Schema::hasColumn('users', 'phone')) {
+            Schema::table('users', function (Blueprint $table) {
+                $table->string('phone')->nullable()->after('status');
+            });
+        }
     }
 
     public function down(): void
