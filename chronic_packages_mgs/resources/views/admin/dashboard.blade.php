@@ -9,8 +9,8 @@
 </div>
 
 <!-- Statistics Cards -->
-<div class="row g-2 mb-3">
-    <div class="col-lg-3 col-md-3 col-sm-6">
+<div class="row g-3 mb-4">
+    <div class="col-xl-3 col-sm-6">
         <div class="stat-card stat-card-primary">
             <div class="d-flex justify-content-between align-items-start mb-2">
                 <div>
@@ -28,7 +28,7 @@
         </div>
     </div>
     
-    <div class="col-lg-3 col-md-3 col-sm-6">
+    <div class="col-xl-3 col-sm-6">
         <div class="stat-card stat-card-info">
             <div class="d-flex justify-content-between align-items-start mb-2">
                 <div>
@@ -46,7 +46,7 @@
         </div>
     </div>
     
-    <div class="col-lg-3 col-md-3 col-sm-6">
+    <div class="col-xl-3 col-sm-6">
         <div class="stat-card stat-card-success">
             <div class="d-flex justify-content-between align-items-start mb-2">
                 <div>
@@ -64,7 +64,7 @@
         </div>
     </div>
     
-    <div class="col-lg-3 col-md-3 col-sm-6">
+    <div class="col-xl-3 col-sm-6">
         <div class="stat-card stat-card-warning">
             <div class="d-flex justify-content-between align-items-start mb-2">
                 <div>
@@ -84,8 +84,8 @@
 </div>
 
 <!-- Additional Stats Row -->
-<div class="row g-2 mb-3">
-    <div class="col-lg-2 col-md-6">
+<div class="row g-3 mb-4">
+    <div class="col-md-4">
         <div class="stat-card stat-card-secondary">
             <div class="d-flex justify-content-between align-items-center">
                 <div>
@@ -99,7 +99,7 @@
         </div>
     </div>
     
-    <div class="col-lg-2 col-md-6">
+    <div class="col-md-4">
         <div class="stat-card stat-card-purple">
             <div class="d-flex justify-content-between align-items-center">
                 <div>
@@ -113,7 +113,7 @@
         </div>
     </div>
     
-    <div class="col-lg-2 col-md-6">
+    <div class="col-md-4">
         <div class="stat-card stat-card-teal">
             <div class="d-flex justify-content-between align-items-center">
                 <div>
@@ -169,7 +169,7 @@
                     @empty
                         <tr>
                             <td colspan="5" class="text-center py-5">
-                                <i class="bi bi-inbox" style="font-size: 3rem; color: #d1d5db;"></i>
+                                <i class="bi bi-inbox empty-icon"></i>
                                 <p class="text-muted mt-3">No bookings found</p>
                             </td>
                         </tr>

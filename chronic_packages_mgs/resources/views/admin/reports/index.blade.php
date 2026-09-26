@@ -9,7 +9,7 @@
 </div>
 
 <!-- Date Filter -->
-<div class="card mb-3">
+<div class="card mb-4">
     <div class="card-body">
         <form method="GET" action="{{ route('admin.reports.index') }}" class="row g-2">
             <div class="col-md-4">
@@ -28,8 +28,8 @@
 </div>
 
 <!-- Overall Statistics -->
-<div class="row g-2 mb-3">
-    <div class="col-md-3">
+<div class="row g-3 mb-4">
+    <div class="col-xl-3 col-sm-6">
         <div class="stat-card stat-card-primary">
             <div class="d-flex justify-content-between align-items-start mb-2">
                 <div>
@@ -42,7 +42,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-xl-3 col-sm-6">
         <div class="stat-card stat-card-info">
             <div class="d-flex justify-content-between align-items-start mb-2">
                 <div>
@@ -55,7 +55,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-xl-3 col-sm-6">
         <div class="stat-card stat-card-teal">
             <div class="d-flex justify-content-between align-items-start mb-2">
                 <div>
@@ -68,7 +68,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-xl-3 col-sm-6">
         <div class="stat-card stat-card-secondary">
             <div class="d-flex justify-content-between align-items-start mb-2">
                 <div>
@@ -83,7 +83,7 @@
     </div>
 </div>
 
-<div class="row g-2 mb-3">
+<div class="row g-3 mb-4">
     <div class="col-md-4">
         <div class="stat-card stat-card-success">
             <div class="d-flex justify-content-between align-items-start mb-2">
@@ -126,7 +126,7 @@
 </div>
 
 <!-- Package Sales -->
-<div class="card mb-3">
+<div class="card mb-4">
     <div class="card-header">
         <h5 class="mb-0"><i class="bi bi-box-seam me-2"></i>Package Sales</h5>
     </div>
@@ -152,7 +152,7 @@
                     @empty
                         <tr>
                             <td colspan="4" class="text-center py-4">
-                                <i class="bi bi-inbox" style="font-size: 2.5rem; color: #d1d5db;"></i>
+                                <i class="bi bi-inbox empty-icon"></i>
                                 <p class="text-muted mt-2 mb-0">No package sales data</p>
                             </td>
                         </tr>
@@ -164,7 +164,7 @@
 </div>
 
 <!-- Doctor Performance -->
-<div class="card mb-3">
+<div class="card mb-4">
     <div class="card-header">
         <h5 class="mb-0"><i class="bi bi-person-badge me-2"></i>Top Doctors by Bookings</h5>
     </div>
@@ -195,7 +195,7 @@
                     @empty
                         <tr>
                             <td colspan="3" class="text-center py-4">
-                                <i class="bi bi-inbox" style="font-size: 2.5rem; color: #d1d5db;"></i>
+                                <i class="bi bi-inbox empty-icon"></i>
                                 <p class="text-muted mt-2 mb-0">No doctor performance data</p>
                             </td>
                         </tr>
@@ -207,7 +207,7 @@
 </div>
 
 <!-- Agent Performance -->
-<div class="card mb-3">
+<div class="card mb-4">
     <div class="card-header">
         <h5 class="mb-0"><i class="bi bi-people me-2"></i>Top Agents by Bookings</h5>
     </div>
@@ -238,7 +238,7 @@
                     @empty
                         <tr>
                             <td colspan="3" class="text-center py-4">
-                                <i class="bi bi-inbox" style="font-size: 2.5rem; color: #d1d5db;"></i>
+                                <i class="bi bi-inbox empty-icon"></i>
                                 <p class="text-muted mt-2 mb-0">No agent performance data</p>
                             </td>
                         </tr>
@@ -291,7 +291,7 @@
                     @empty
                         <tr>
                             <td colspan="6" class="text-center py-4">
-                                <i class="bi bi-inbox" style="font-size: 2.5rem; color: #d1d5db;"></i>
+                                <i class="bi bi-inbox empty-icon"></i>
                                 <p class="text-muted mt-2 mb-0">No payment data</p>
                             </td>
                         </tr>

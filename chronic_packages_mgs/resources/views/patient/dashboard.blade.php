@@ -9,7 +9,7 @@
 </div>
 
 @if($activeBooking)
-<div class="row g-2 mb-3">
+<div class="row g-3 mb-4">
     <div class="col-md-6">
         <div class="card border-primary shadow-sm">
             <div class="card-header bg-primary text-white">
@@ -85,7 +85,7 @@
 @endif
 
 <!-- Health Statistics -->
-<div class="row g-2 mb-3">
+<div class="row g-3 mb-4">
     <div class="col-md-4">
         <div class="stat-card stat-card-primary">
             <div class="d-flex justify-content-between align-items-start mb-2">
@@ -144,7 +144,7 @@
 </div>
 
 <!-- Appointments and Consultations -->
-<div class="row g-2">
+<div class="row g-3">
     <div class="col-md-6">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
@@ -168,7 +168,7 @@
                     </div>
                 @empty
                     <div class="text-center py-4">
-                        <i class="bi bi-calendar-x" style="font-size: 2.5rem; color: #d1d5db;"></i>
+                        <i class="bi bi-calendar-x empty-icon"></i>
                         <p class="text-muted mt-2 mb-0">No upcoming appointments</p>
                     </div>
                 @endforelse
@@ -201,7 +201,7 @@
                     </div>
                 @empty
                     <div class="text-center py-4">
-                        <i class="bi bi-inbox" style="font-size: 2.5rem; color: #d1d5db;"></i>
+                        <i class="bi bi-inbox empty-icon"></i>
                         <p class="text-muted mt-2 mb-0">No consultations yet</p>
                     </div>
                 @endforelse

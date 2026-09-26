@@ -9,7 +9,7 @@
 </div>
 
 <!-- Statistics Cards -->
-<div class="row g-2 mb-3">
+<div class="row g-3 mb-4">
     <div class="col-lg-4 col-md-6">
         <div class="stat-card stat-card-primary">
             <div class="d-flex justify-content-between align-items-start mb-2">
@@ -152,7 +152,7 @@
                     @empty
                         <tr>
                             <td colspan="4" class="text-center py-5">
-                                <i class="bi bi-calendar-x" style="font-size: 3rem; color: #d1d5db;"></i>
+                                <i class="bi bi-calendar-x empty-icon"></i>
                                 <p class="text-muted mt-3">No upcoming appointments</p>
                             </td>
                         </tr>

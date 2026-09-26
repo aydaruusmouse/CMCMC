@@ -97,7 +97,7 @@
                     @empty
                         <tr>
                             <td colspan="8" class="text-center py-5">
-                                <i class="bi bi-inbox" style="font-size: 3rem; color: #d1d5db;"></i>
+                                <i class="bi bi-inbox empty-icon"></i>
                                 <p class="text-muted mt-3">No patients assigned yet</p>
                             </td>
                         </tr>

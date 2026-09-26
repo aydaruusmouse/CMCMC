@@ -9,90 +9,87 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <style>
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            font-family: 'Inter', sans-serif;
-        }
-        .login-card {
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            border: none;
-        }
-        .login-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        .login-header i {
-            font-size: 3rem;
-            color: #667eea;
-            margin-bottom: 1rem;
-        }
-        .login-header h2 {
-            font-weight: 700;
-            color: #1f2937;
-            margin-bottom: 0.5rem;
-        }
-        .login-header p {
-            color: #6b7280;
-            font-size: 0.9rem;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}?v={{ filemtime(public_path('css/app.css')) }}">
 </head>
-<body class="d-flex align-items-center justify-content-center" style="min-height: 100vh;">
-    <div class="card login-card shadow-lg" style="width: 100%; max-width: 420px;">
-        <div class="card-body p-5">
-            <div class="login-header">
-                <i class="bi bi-heart-pulse-fill"></i>
-                <h2>CMCMS</h2>
-                <p>Chronic & Maternal Care Management System</p>
+<body class="auth-page">
+    <div class="auth-wrapper">
+        <section class="auth-brand d-none d-lg-flex">
+            <div class="d-flex align-items-center gap-2">
+                <span class="sidebar-logo"><i class="bi bi-heart-pulse-fill"></i></span>
+                <span class="fw-bold fs-5">CMCMS</span>
             </div>
-            
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul class="mb-0">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
 
-            <form method="POST" action="{{ route('login') }}">
-                @csrf
-                
-                <div class="mb-3">
-                    <label for="phone" class="form-label">
-                        <i class="bi bi-telephone me-1"></i>Phone Number
-                    </label>
-                    <input type="text" 
-                           class="form-control" 
-                           id="phone" 
-                           name="phone" 
-                           value="{{ old('phone') }}" 
-                           placeholder="e.g., 612345678"
-                           required 
-                           autofocus>
+            <div>
+                <h1 class="auth-brand-title">Continuous care for chronic &amp; maternal patients.</h1>
+                <p class="auth-brand-text">Manage packages, bookings, consultations and patient health records in one place.</p>
+                <ul class="auth-features">
+                    <li><i class="bi bi-check2-circle"></i>Track blood pressure, sugar and maternal vitals</li>
+                    <li><i class="bi bi-check2-circle"></i>Coordinate agents, doctors and patients</li>
+                    <li><i class="bi bi-check2-circle"></i>Real-time reports and revenue insights</li>
+                </ul>
+            </div>
+
+            <div class="small opacity-75">&copy; {{ date('Y') }} Chronic &amp; Maternal Care Management System</div>
+        </section>
+
+        <section class="auth-form-panel">
+            <div class="auth-form">
+                <div class="d-flex d-lg-none align-items-center gap-2 mb-4">
+                    <span class="sidebar-logo"><i class="bi bi-heart-pulse-fill"></i></span>
+                    <span class="fw-bold fs-5">CMCMS</span>
                 </div>
 
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" required>
-                </div>
+                <h2 class="auth-title">Welcome back</h2>
+                <p class="text-muted mb-4">Sign in with your phone number to continue.</p>
 
-                <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="remember" name="remember">
-                    <label class="form-check-label" for="remember">Remember me</label>
-                </div>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul class="mb-0 ps-3">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
-                <button type="submit" class="btn btn-primary w-100" style="padding: 0.75rem; font-weight: 600;">
-                    <i class="bi bi-box-arrow-in-right me-2"></i>Login
-                </button>
-            </form>
-        </div>
+                <form method="POST" action="/login">
+                    @csrf
+
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Phone number</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+                            <input type="text"
+                                   class="form-control"
+                                   id="phone"
+                                   name="phone"
+                                   value="{{ old('phone') }}"
+                                   placeholder="e.g., 612345678"
+                                   required
+                                   autofocus>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-4 form-check">
+                        <input type="checkbox" class="form-check-input" id="remember" name="remember">
+                        <label class="form-check-label" for="remember">Remember me</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-lg w-100">
+                        Sign in <i class="bi bi-arrow-right ms-1"></i>
+                    </button>
+                </form>
+            </div>
+        </section>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

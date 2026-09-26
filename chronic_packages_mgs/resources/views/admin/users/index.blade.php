@@ -68,10 +68,11 @@
         </div>
 
         </div>
+        @if($users->hasPages())
         <div class="card-footer bg-light p-3">
             {{ $users->links() }}
         </div>
+        @endif
     </div>
-</div>
 @endsection
 

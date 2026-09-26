@@ -56,9 +56,11 @@
                 </tbody>
             </table>
         </div>
+        @if($consultations->hasPages())
         <div class="card-footer bg-light p-3">
             {{ $consultations->links() }}
         </div>
+        @endif
     </div>
 </div>
 @endsection

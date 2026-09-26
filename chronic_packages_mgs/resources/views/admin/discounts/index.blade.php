@@ -82,10 +82,11 @@
         </div>
 
         </div>
+        @if($discounts->hasPages())
         <div class="card-footer bg-light p-3">
             {{ $discounts->links() }}
         </div>
+        @endif
     </div>
-</div>
 @endsection
 

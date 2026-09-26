@@ -128,9 +128,11 @@
                 </tbody>
             </table>
         </div>
+        @if($bookings->hasPages())
         <div class="card-footer bg-light p-3">
             {{ $bookings->links() }}
         </div>
+        @endif
     </div>
 </div>
 

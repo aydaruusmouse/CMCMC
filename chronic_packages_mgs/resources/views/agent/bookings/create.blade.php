@@ -272,7 +272,7 @@
 
             <div class="row g-3 mb-0">
                 <div class="col-md-6">
-                    <div class="form-check p-3 border rounded">
+                    <div class="form-check border rounded py-3 pe-3" style="padding-left: 2.75rem;">
                         <input class="form-check-input" 
                                type="checkbox" 
                                id="is_new_patient" 
@@ -282,7 +282,7 @@
                         <label class="form-check-label fw-semibold" for="is_new_patient">
                             <i class="bi bi-person-plus me-1 text-primary"></i>New Patient
                         </label>
-                        <small class="d-block text-muted ms-4 mt-1">Check if this is the patient's first visit</small>
+                        <small class="d-block text-muted mt-1">Check if this is the patient's first visit</small>
                     </div>
                 </div>
                 <div class="col-md-6">

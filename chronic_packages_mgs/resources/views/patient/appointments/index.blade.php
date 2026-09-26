@@ -158,7 +158,7 @@
                     @empty
                         <tr>
                             <td colspan="5" class="text-center py-5">
-                                <i class="bi bi-calendar-x" style="font-size: 3rem; color: #d1d5db;"></i>
+                                <i class="bi bi-calendar-x empty-icon"></i>
                                 <p class="text-muted mt-3">No appointments found</p>
                             </td>
                         </tr>

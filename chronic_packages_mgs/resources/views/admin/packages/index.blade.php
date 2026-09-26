@@ -64,10 +64,11 @@
         </div>
 
         </div>
+        @if($packages->hasPages())
         <div class="card-footer bg-light p-3">
             {{ $packages->links() }}
         </div>
+        @endif
     </div>
-</div>
 @endsection
 
