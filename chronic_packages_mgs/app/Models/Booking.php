@@ -22,7 +22,7 @@ class Booking extends Model
         'source_of_booking',
         'where_heard_from',
         'is_new_patient',
-        'satisfaction_level',
+        'complain',
         'discount_id',
         'final_price',
     ];

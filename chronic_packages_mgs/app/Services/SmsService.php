@@ -10,7 +10,7 @@ class SmsService
     private string $apiUrl = 'http://172.16.53.106:8082/sdf/web/sms/otp/send';
     private string $username = 'sms_api';
     private string $password = 'SMS_API@123';
-    private string $fromNumber = 'Telesom CRM';
+    private string $fromNumber = 'Shaafi CMCMC';
 
     /**
      * Send SMS notification

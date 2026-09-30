@@ -60,7 +60,7 @@ class BookingController extends Controller
             'source_of_booking' => 'nullable|string',
             'where_heard_from' => 'nullable|string',
             'is_new_patient' => 'nullable|boolean',
-            'satisfaction_level' => 'nullable|integer|min:1|max:5',
+            'complain' => 'nullable|string|max:2000',
             'discount_id' => 'nullable|exists:discounts,id',
         ]);
 

@@ -98,7 +98,7 @@ class BookingService
                 'source_of_booking' => $data['source_of_booking'] ?? null,
                 'where_heard_from' => $data['where_heard_from'] ?? null,
                 'is_new_patient' => $data['is_new_patient'] ?? true,
-                'satisfaction_level' => $data['satisfaction_level'] ?? null,
+                'complain' => $data['complain'] ?? null,
                 'discount_id' => $data['discount_id'] ?? null,
                 'final_price' => $finalPrice,
             ]);

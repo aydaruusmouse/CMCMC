@@ -286,19 +286,16 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <label for="satisfaction_level" class="form-label fw-semibold">
-                        <i class="bi bi-star me-1 text-primary"></i>Satisfaction Level (1-5)
+                    <label for="complain" class="form-label fw-semibold">
+                        <i class="bi bi-chat-left-text me-1 text-primary"></i>Complain
                     </label>
-                    <input type="number" 
-                           class="form-control @error('satisfaction_level') is-invalid @enderror" 
-                           id="satisfaction_level" 
-                           name="satisfaction_level" 
-                           value="{{ old('satisfaction_level') }}" 
-                           min="1" 
-                           max="5"
-                           placeholder="Rate from 1 to 5">
-                    <small class="text-muted">1 = Poor, 5 = Excellent</small>
-                    @error('satisfaction_level')
+                    <textarea class="form-control @error('complain') is-invalid @enderror"
+                              id="complain"
+                              name="complain"
+                              rows="3"
+                              maxlength="2000"
+                              placeholder="Enter the patient's complain (optional)">{{ old('complain') }}</textarea>
+                    @error('complain')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
